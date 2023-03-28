@@ -1,11 +1,14 @@
 package com.lion.sbb2.question.controller;
 
 import com.lion.sbb2.domain.DataNotFoundException;
+import com.lion.sbb2.question.DTO.QuestionForm;
 import com.lion.sbb2.question.entity.Question;
 import com.lion.sbb2.question.service.QuestionService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,13 +35,16 @@ public class QuestionController {
         return "question/question_detail";
     }
     @GetMapping("/create")
-    public String create(){
+    public String showCreate(QuestionForm questionForm){
         return "question/question_create";
     }
 
     @PostMapping("/create")
-    public String create(String subject, String content){
-        int id =service.save(subject, content).getId();
+    public String create(@Valid QuestionForm questionForm, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return "question/question_create";
+        }
+        int id =service.save(questionForm.getSubject(), questionForm.getContent()).getId();
         return "redirect:/question/detail/"+id;
     }
 }
