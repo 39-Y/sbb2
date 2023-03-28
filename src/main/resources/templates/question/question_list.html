@@ -1,27 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<table>
-    <thead>
-    <tr>
-        <th>제목</th>
-        <th>작성일자</th>
-    </tr>
-    </thead>
-    <tbody>
-        <tr th:each="question, idx : ${questionList}">
-            <td>
-                <a th:href="@{|/question/detail/${question.id}|}"
-                    th:text="${question.subject}"></a>
-            </td>
-            <td th:text="${question.createDate}"></td>
-        </tr>
-    </tbody>
+<html lang="en" layout:decorate="~{/layout/layout}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
-</table>
-</body>
+<section layout:fragment="content" class="container my-3">
+    <table class="table">
+        <thead class="table-dark">
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성일자</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tr>
+            <tr th:each="question, loop : ${questionList}">
+                <td th:text="${loop.count}"></td>
+                <td>
+                    <a th:href="@{|/question/detail/${question.id}|}"
+                        th:text="${question.subject}"></a>
+                </td>
+                <td th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+            </tr>
+        </tbody>
+
+    </table>
+</section>
 </html>
