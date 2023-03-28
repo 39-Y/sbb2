@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -29,5 +30,15 @@ public class QuestionController {
         model.addAttribute("question", q);
 
         return "question/question_detail";
+    }
+    @GetMapping("/create")
+    public String create(){
+        return "question/question_create";
+    }
+
+    @PostMapping("/create")
+    public String create(String subject, String content){
+        int id =service.save(subject, content).getId();
+        return "redirect:/question/detail/"+id;
     }
 }

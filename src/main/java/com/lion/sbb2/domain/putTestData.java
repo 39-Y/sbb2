@@ -13,10 +13,8 @@ public class putTestData {
     @Bean
     public CommandLineRunner insert(QuestionService service){
         return args -> {
-          service.save(Question.builder().subject("sbb는 무엇을 하는 곳인가요?")
-                  .content("항상 궁금했습니다.").build());
-          service.save(Question.builder().subject("spring boot에서만 jpa를 쓰나요?")
-                  .content("jpa 쓰는게 어렵네요.").build());
+          service.save("sbb는 무엇을 하는 곳인가요?", "항상 궁금했습니다.");
+          service.save("spring boot에서만 jpa를 쓰나요?","jpa 쓰는게 어렵네요.");
         };
     }
 }

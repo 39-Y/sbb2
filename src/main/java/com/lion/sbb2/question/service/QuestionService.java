@@ -15,8 +15,10 @@ public class QuestionService {
     public List<Question> getList(){
         return repository.findAll();
     }
-    public Question save(Question q){
-        return repository.save(q);
+    public Question save(String subject, String content){
+        return repository.save(Question.builder()
+                .subject(subject)
+                .content(content).build());
     }
 
     public Question getQuestion(Integer id) {
