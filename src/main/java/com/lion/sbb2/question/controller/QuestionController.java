@@ -1,5 +1,7 @@
 package com.lion.sbb2.question.controller;
 
+import com.lion.sbb2.domain.DataNotFoundException;
+import com.lion.sbb2.question.entity.Question;
 import com.lion.sbb2.question.service.QuestionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -23,7 +25,9 @@ public class QuestionController {
 
     @GetMapping("/detail/{id}")
     public String showDetail(@PathVariable("id") Integer id, Model model){
-        model.addAttribute("question", service.getQuestion(id));
-        return "question/question_list";
+        Question q = service.getQuestion(id);
+        model.addAttribute("question", q);
+
+        return "question/question_detail";
     }
 }

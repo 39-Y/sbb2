@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/style.css}" type="text/css">
+</head>
+<body>
+<h1 th:text="${question.subject}"></h1>
+<article th:text="${question.content}"></article>
+
+<article>
+    <h5 th:text="|${#lists.size(question.answers)}개의 답변이 있습니다.|"></h5>
+    <ul>
+        <li th:each="answer:${question.answers}" th:text="${answer.content}"></li>
+    </ul>
+</article>
+
+<form th:action="@{|/answer/create/${question.id}|}" method="post">
+    <textarea name="content" id="content" rows="15"></textarea>
+    <input type="submit" value="답변등록">
+</form>
+
+</body>
+</html>

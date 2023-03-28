@@ -1,5 +1,6 @@
 package com.lion.sbb2.question.service;
 
+import com.lion.sbb2.domain.DataNotFoundException;
 import com.lion.sbb2.question.entity.Question;
 import com.lion.sbb2.question.entity.QuestionRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,10 @@ public class QuestionService {
     }
 
     public Question getQuestion(Integer id) {
-        return repository.findById(id).orElse(null);
+        Question q = repository.findById(id).orElse(null);
+        if(q==null)
+            throw new DataNotFoundException("question not found");
+        return q;
+
     }
 }
