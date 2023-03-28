@@ -1,5 +1,6 @@
 package com.lion.sbb2.question.controller;
 
+import com.lion.sbb2.answer.DTO.AnswerForm;
 import com.lion.sbb2.domain.DataNotFoundException;
 import com.lion.sbb2.question.DTO.QuestionForm;
 import com.lion.sbb2.question.entity.Question;
@@ -28,7 +29,7 @@ public class QuestionController {
     }
 
     @GetMapping("/detail/{id}")
-    public String showDetail(@PathVariable("id") Integer id, Model model){
+    public String showDetail(@PathVariable("id") Integer id, Model model, AnswerForm answerForm){
         Question q = service.getQuestion(id);
         model.addAttribute("question", q);
 
